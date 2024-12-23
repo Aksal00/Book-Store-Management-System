@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Welcom to my book store</h1>
+        <h1>Welcome to my book store</h1>
         <button className='book-button' onClick={()=> navigate('/books')}>Get started</button>
       </header>
     </div>
