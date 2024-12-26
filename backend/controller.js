@@ -10,24 +10,40 @@ const getBooks = (req,res,next) => {
             res.json({message: error})
         });
 }
-const addBook = (req,res,next) => {
-    const book = new Book({
-        id: req.body.id,
-        name: req.body.name,
-        author: req.body.author,
-    })
-    book.save()
-    .then(response => {
-        res.json({response})
-    })
-    .catch(error=>{
-        res.json({message: error})
-    });
-}
+const addBook = (req, res, next) => {
+    const { id, name, author } = req.body;
+
+    // Check if a book with the same ID already exists
+    Book.findOne({ id: id })
+        .then(existingBook => {
+            if (existingBook) {
+                // If a book with the same ID exists, send a message
+                return res.status(400).json({ message: "A book with this ID already exists." });
+            }
+
+            // If no book with this ID exists, create and save the new book
+            const book = new Book({
+                id: id,
+                name: name,
+                author: author,
+            });
+
+            book.save()
+                .then(response => {
+                    res.json({ response });
+                })
+                .catch(error => {
+                    res.json({ message: error });
+                });
+        })
+        .catch(error => {
+            res.json({ message: error });
+        });
+};
 const updateBook = (req,res,next) => {
     
     const {id, name, author}= req.body;
-    Book.updateOne({id:id},{$set:{name:name}},{$set:{author:author}})
+    Book.updateOne({id:id},{$set:{name:name,author:author}})
         .then(response => {
             res.json({response})
         })

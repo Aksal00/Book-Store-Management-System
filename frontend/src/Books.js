@@ -13,6 +13,7 @@ const Books = ()=>{
 
     useEffect(()=>{
         getBooks(); 
+        
     },[]);
     const getBooks = () =>{
         Axios.get('http://localhost:3001/api/books')
@@ -35,7 +36,7 @@ const Books = ()=>{
             .then(()=>{
                 getBooks();
                 setSubmitted(false);
-                isEdit(false);
+                setIsEdit(false);
             })
             .catch(error =>{
                 console.error("Axios Error: ",error)
@@ -52,7 +53,7 @@ const Books = ()=>{
             .then(()=>{
                 getBooks();
                 setSubmitted(false);
-                isEdit(false);
+                setIsEdit(false);
             })
             .catch(error =>{
                 console.error("Axios Error: ",error)

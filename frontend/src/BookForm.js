@@ -122,7 +122,7 @@ const BookForm = ({addBook,updateBook,submitted,data, isEdit}) => {
                             backgroundColor: '#00c6e6'
                         }
                     }}
-                    onClick={()=>isEdit? updateBook({id,name,author }):addBook({id,name,author })}
+                    onClick={()=>isEdit?updateBook({id,name,author }):addBook({id,name,author })}
                 
                 >
                 {

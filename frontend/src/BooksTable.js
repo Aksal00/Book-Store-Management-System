@@ -2,6 +2,11 @@ import { Typography,Paper,Table,TableBody,TableCell,TableRow,TableContainer,Butt
 import React from 'react'
 
 const BooksTable = ({rows, selectedBook, deleteBook}) => {
+
+    // Sort the rows by 'id' in ascending order
+    const sortedRows = [...rows].sort((a, b) => a.id - b.id);
+
+
     return(
     <TableContainer component={Paper}>
         <Typography component={'h1'} sx={{ fontSize: '20px',fontWeight: 'bold',marginBottom: '10px',color: '#000000'}}>Book Table</Typography>
@@ -13,7 +18,7 @@ const BooksTable = ({rows, selectedBook, deleteBook}) => {
             </TableRow>
             <TableBody>
                 {
-                    rows.length>0? rows.map(row=>(
+                    sortedRows.length>0? sortedRows.map(row=>(
                         <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': {border:0}}}>
                             <TableCell component='th' scope='row'>{row.id}</TableCell>
                             <TableCell component='th' scope='row'>{row.name}</TableCell>
