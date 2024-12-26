@@ -1,11 +1,28 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Grid2, Typography} from "@mui/material"
 
-const BookForm = () => {
+const BookForm = ({addBook,updateBook,submitted,data, isEdit}) => {
 
     const [id,setID] = useState(0)
     const [name,setName] = useState("")
     const [author,setAuthor] = useState("")
+
+    useEffect(()=>{
+        if(!submitted){
+            setID(0)
+            setName('')
+            setAuthor('')
+        }
+
+    },[submitted]);
+    useEffect(()=>{
+        if(data?.id && data.id !== 0){
+            setID(data.id)
+            setName(data.name)
+            setAuthor(data.author)
+        }
+
+    },[data]);
 
     return (
         <Grid2
@@ -105,9 +122,12 @@ const BookForm = () => {
                             backgroundColor: '#00c6e6'
                         }
                     }}
+                    onClick={()=>isEdit? updateBook({id,name,author }):addBook({id,name,author })}
                 
                 >
-                    Add book
+                {
+                    isEdit? 'Update': 'Add'
+                }
                 </Button> 
             </Grid2>      
         </Grid2>

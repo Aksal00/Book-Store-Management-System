@@ -30,7 +30,7 @@ app.put('/updatebook',(req,res)=>{
         res.send()
     })
 })
-app.delete('/deletebook',(req,res)=>{
+app.post('/deletebook',(req,res)=>{
     controller.deleteBook(req.body,(callback) =>{
         res.send()
     })

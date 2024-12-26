@@ -1,7 +1,7 @@
 import { Typography,Paper,Table,TableBody,TableCell,TableRow,TableContainer,Button } from '@mui/material'
 import React from 'react'
 
-const BooksTable = ({rows}) => {
+const BooksTable = ({rows, selectedBook, deleteBook}) => {
     return(
     <TableContainer component={Paper}>
         <Typography component={'h1'} sx={{ fontSize: '20px',fontWeight: 'bold',marginBottom: '10px',color: '#000000'}}>Book Table</Typography>
@@ -21,13 +21,13 @@ const BooksTable = ({rows}) => {
                             <TableCell>
                                 <Button
                                     sx={{margin: '0px 10px'}}
-                                    onClick={()=>{}}
+                                    onClick={()=>selectedBook({ id: row.id, name: row.name, author: row.author })}
                                 >
                                     Update
                                 </Button>
                                 <Button
                                     sx={{margin: '0px 10px'}}
-                                    onClick={()=>{}}
+                                    onClick={()=>deleteBook({ id: row.id})}
                                 >
                                     Delete
                                 </Button>
